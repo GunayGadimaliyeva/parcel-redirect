@@ -42,8 +42,11 @@
       }
 
       // Angular saytına yönləndiririk
-      const redirectUrl = `https://senin-angular-domain.az/izleme?fin=${encodeURIComponent(fin)}&barcode=${encodeURIComponent(barcode)}`;
-      window.location.href = redirectUrl;
+    const encryptedBarcode = encryptWithFernet(barcode); // bunu backenddə edə bilərsən
+    // const url = `http://localhost:5001/track-package-from-main-page/${encryptedBarcode}/${fin}`;
+    const url = `http://localhost:5001/track-package-from-main-page/${encodeURIComponent(encryptedBarcode)}/${encodeURIComponent(fin)}`;
+
+    window.location.href = url;
     }
   </script>
 </body>
