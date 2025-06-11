@@ -27,27 +27,10 @@
 </head>
 <body>
   <h2>Bağlamanı İzləmək</h2>
-  <input type="text" id="fin" placeholder="FIN kodu daxil edin" />
-  <input type="text" id="barcode" placeholder="Bağlama barkodu daxil edin" />
-  <button onclick="redirectToTracking()">Təsdiqlə</button>
-
-  <script>
-    function redirectToTracking() {
-      const fin = document.getElementById('fin').value.trim();
-      const barcode = document.getElementById('barcode').value.trim();
-
-      if (!fin || !barcode) {
-        alert('Zəhmət olmasa həm FIN, həm də barkodu daxil edin.');
-        return;
-      }
-
-      // Angular saytına yönləndiririk
-    const encryptedBarcode = encryptWithFernet(barcode); // bunu backenddə edə bilərsən
-    // const url = `http://localhost:5001/track-package-from-main-page/${encryptedBarcode}/${fin}`;
-    const url = `http://localhost:5001/track-package-from-main-page/${encodeURIComponent(encryptedBarcode)}/${encodeURIComponent(fin)}`;
-
-    window.location.href = url;
-    }
-  </script>
+  <form method="POST" action="http://localhost:5001/track">
+    <input type="text" name="fin" placeholder="FIN kodu daxil edin" required />
+    <input type="text" name="barcode" placeholder="Bağlama barkodu daxil edin" required />
+    <button type="submit">Təsdiqlə</button>
+  </form>
 </body>
 </html>
